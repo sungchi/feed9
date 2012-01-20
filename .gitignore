@@ -6,4 +6,5 @@ databases
 cache
 errors
 main_ori.css
-ui.datepicker*
+static/ui.datepicker.js
+static/ui.datepicker.css
