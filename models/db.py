@@ -4,19 +4,10 @@ import time
 from math import log
 now=time.time()
 
-'''
-try:
-    from gluon.contrib.gql import *
-    db=GQLDB()
-    session.connect(request,response,db=db)
-except:
-    db=SQLDB()
-'''
-
 from gluon.settings import settings
 from gluon.tools import Auth
 import mail_setting
-#auth = Auth(db)
+
 # if running on Google App Engine
 if settings.web2py_runtime_gae:
     from gluon.contrib.gql import *
@@ -61,21 +52,6 @@ custom_auth_table.email.requires = [
 auth.settings.table_user = custom_auth_table
 auth.define_tables(username=False)
 
-'''
-db.define_table('person',
-    Field('alias'),
-    Field('email'),
-    Field('password','password',readable=False),
-    Field('post_time','double',default=now),
-    Field('favorites','text',default='|'))
-
-db.person.alias.requires=[IS_NOT_EMPTY(), IS_NOT_IN_DB(db,db.person.alias)]
-db.person.email.requires=[IS_EMAIL(), IS_NOT_IN_DB(db,db.person.email)]
-db.person.password.requires=[CRYPT()]
-#chapter8 validate
-'''
-
-
 db.define_table('category',
    Field('name'),
    Field('alias',default='새 카테고리'),
@@ -97,11 +73,9 @@ db.define_table('news',
    Field('author_alias'),
    Field('url',length=2048), 
    Field('title',length=2048),
-   #Field('hotness','double',default=1.0),
    Field('flagged','boolean',default=False))
 
 db.news.url.requires=[IS_NOT_EMPTY()]
-#db.news.category.requires=IS_IN_DB(db,db.category.name)
 db.news.title.requires=IS_NOT_EMPTY()
 
 db.define_table('comment',

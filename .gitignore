@@ -3,4 +3,6 @@
 *.swp
 sessions
 databases
+cache
 errors
+main_ori.css

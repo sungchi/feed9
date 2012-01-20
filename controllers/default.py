@@ -2,29 +2,7 @@ from urlparse import urlparse
 import time
 now=time.time()
 
-#if not session.categories:
-#    session.categories=[r.name for r in db().select(db.category.ALL)]
-
 def author_func():
-    '''
-    form=SQLFORM(db.person,fields=['email','password'],_action=URL('index'),submit_button='로그인')
-    form.element('input[name=email]')['_class']='span3'
-    form.element('input[name=email]')['_placeholder']='email'
-    form.element('input[name=password]')['_class']='span3'
-    form.element('input[name=password]')['_placeholder']='password'
-    form.element('input[type=submit]')['_class']='btn'
-    if FORM.accepts(form,request.vars,session):
-       users=db(db.person.email==form.vars.email)\
-               (db.person.password==form.vars.password).select()
-       if len(users):
-          session.authorized=users[0].id
-          session.email=users[0].email
-          session.alias=users[0].alias
-          session.flash='user logged in'
-          redirect(URL(r=request,f='index'))
-       else:
-          form.errors['password']='invdalid password'
-     '''
     login_form=auth.login(next=URL(r=request,f='index'))
     login_form.element('input[name=email]')['_class']='span3'
     login_form.element('input[name=email]')['_placeholder']='email'
@@ -35,16 +13,6 @@ def author_func():
     return login_form
 
 def register():
-    '''
-    form=SQLFORM(db.person,fields=['alias', 'email','password'])
-    login_form = author_func()
-    if form.accepts(request.vars,session):
-          session.authorized=form.vars.id
-          session.email=form.vars.email
-          session.alias=form.vars.alias
-          session.flash='user registered'
-          redirect(URL(r=request,f='index'))
-    '''
     if auth.user_id:
         redirect(URL(r=request,f='index'))
     login_form = author_func()
@@ -60,6 +28,7 @@ def register():
     form.element('input[type=submit]')['_class']='btn'
     form.element('input[type=submit]')['_value']='회원가입'
     return dict(login_form=login_form,form=form)
+
 def profile():
     form=auth.profile()
     form.element('input[name=alias]')['_class']='span3'
@@ -68,32 +37,13 @@ def profile():
     form.element('input[type=submit]')['_value']='저장'
     return dict(form=form)
 '''
+#built-in user function
 def user(): 
     login_form = author_func()
     cat_list=[[r.alias,r.name] for r in db().select(db.category.ALL)]
     return dict(cat_list=cat_list,login_form=login_form,form=auth())
 '''
 
-'''
-def login():
-    db.person.email.requires=IS_NOT_EMPTY()    
-    form=SQLFORM(db.person,fields=['email','password'])
-    db.person.email.requires=IS_NOT_EMPTY()    
-    login_form = author_func()
-    if FORM.accepts(form,request.vars,session):
-       users=db(db.person.email==form.vars.email)\
-               (db.person.password==form.vars.password).select()
-       if len(users):
-          session.authorized=users[0].id
-          session.email=users[0].email
-          session.alias=users[0].alias
-          session.flash='user logged in'
-          redirect(URL(r=request,f='index'))
-       else:
-          form.errors['password']='invdalid password'
-    cat_list=[[r.alias,r.name] for r in db().select(db.category.ALL)]
-    return dict(cat_list=cat_list,login_form=login_form,form=form)
-'''
 def login():
     if auth.user_id:
         redirect(URL(r=request,f='index'))
@@ -103,13 +53,6 @@ def login():
 
 
 def logout():
-    '''
-    session.authorized=None
-    session.email=None
-    session.alias=None
-    session.flash='user logged out'
-    redirect(URL(r=request,f='index'))
-    '''
     return auth.logout(next=URL(r=request,f='index'))
 
 @cache(request.env.path_info, time_expire=10, cache_model=cache.ram)
@@ -210,7 +153,7 @@ def delete():
     except:
         session.flash='internal error'
     redirect(URL(r=request,f='index',args=[news.category]))
-#@auth.requires_login()
+
 def vote():
     if not auth.user_id: redirect(request.env.http_referer)
     news=db(db.news.id==request.args[1]).select()[0]
