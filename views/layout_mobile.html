@@ -1,0 +1,98 @@
+<!DOCTYPE html> 
+<html lang="ko"> 
+	<head> 
+	<title>{{block titlebar}}Feed9{{end}}</title>
+	<meta charset="utf-8">
+    <meta name="author" content="All: feed9 [www.feed9.com]">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes"/>	
+	<link rel="apple-touch-icon" href="{{=URL(r=request,c='static',f='iphoneicon.png')}}" />
+	<link rel="shortcut icon" href="{{=URL(r=request,c='static',f='favicon.ico')}}" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+	<style type="text/css">
+      .all_cat { font-size: 12px; color: #E64B50; text-decoration: none; display: inline-block; border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; background-color: white; border: 1px solid rgba(0, 0, 0, 0.1); padding: 5px 10px; line-height: 14px; margin-bottom: 4px; margin-right: 2px; }
+    </style>
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-28035685-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+</head> 
+<body> 
+
+<div data-role="page" id="main">
+
+	<div data-role="header">
+		<a onclick="location.reload(true)" href="/" data-icon="home">홈</a>
+		<h1>{{block page_name}}{{end}}</h1>
+		<a href="#two" data-icon="grid">카테고리</a>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		{{include}}    
+	</div><!-- /content -->
+<div data-role="footer" data-id="foo1" data-position="fixed">
+		<div data-role="navbar">
+			<ul>
+				{{block footer_nav}}
+				{{end}}
+			</ul>
+		</div><!-- /navbar -->
+</div><!-- /footer -->
+
+</div><!-- /page -->
+
+<!-- Start of second page: #two -->
+<div data-role="page" id="two" data-theme="a">
+	<div data-role="header">
+		<a href="/" data-icon="home">홈</a>
+		<h1>카테고리</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="a">	
+		{{if cat_list:}}	
+			<div class="cat_list">
+    		{{for category in cat_list:}}
+			<a data-role='button' data-inline='true' href='{{=URL(r=request,f='index',args=[category[1]])}}'>{{=category[0]}}</a>
+    		{{pass}}
+			</div>
+		{{pass}}
+		<p>
+		<a href="#main" data-rel="back" data-role="button" data-inline="true" data-icon="back" data-theme="b">메인화면 돌아가기</a>
+		</p>	
+		
+	</div><!-- /content -->
+</div><!-- /page two -->
+
+<!-- Start of third page: #popup -->
+<div data-role="page" id="popup">
+
+	<div data-role="header" data-theme="e">
+		<h1>링크내용과 URL</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="d">	
+		<div id="modal-from-dom" class="modal hide fade">
+            <div class="modal-body">
+              <textarea class="span9" onclick="this.focus();this.select()" id="textarea2" name="textarea2" rows="5"></textarea>
+            </div>
+            <div class="modal-footer" id="char_count">
+              0
+            </div>
+		</div>	
+		<p><a href="#main" data-rel="back" data-role="button" data-inline="true" data-icon="back">메인화면 돌아가기</a></p>	
+	</div><!-- /content -->
+	
+</div><!-- /page popup -->
+
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+.DS_Store
+*.bak
+*.swp
+sessions
+databases
+errors

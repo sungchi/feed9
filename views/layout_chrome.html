@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="All: feed9 [www.feed9.com]">
+    <link rel="stylesheet" media="screen,projection" type="text/css" href="{{=URL(r=request,c='static',f='css/main.css')}}" />
+    <link rel="shortcut icon" href="{{=URL(r=request,c='static',f='favicon.ico')}}" />
+	<title>{{block titlebar}}Feed9{{end}}</title>
+	<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28035685-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+    <div class="span9">
+
+      <div class="content">
+        <div class="row wide">
+          <div class="span9">
+			{{include}}        
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- /container -->
+</body>
+</html>

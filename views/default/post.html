@@ -1,0 +1,16 @@
+{{extend 'layout_wide.html'}}
+{{=form.custom.begin}}
+<div class="post_input">{{=form.custom.widget.url}}</div>
+<div class="post_input">{{=form.custom.widget.title}}</div>
+<div class="post_input">
+<label id="post_radio"><input type="radio" name="category" value="" id="" checked="checked" /><span> 없음</span></label>
+{{for item in cat_list:}}
+<label id="post_radio"><input type="radio" name="category" value="{{=item[1]}}" id="{{=item[1]}}"/><span> {{=item[0]}}</span>
+</label>
+{{pass}}
+</div>
+<div class="post_submit">{{=form.custom.submit}}</div>
+{{=form.custom.end}}
+{{block page_name}}
+새로 올리기
+{{end}}

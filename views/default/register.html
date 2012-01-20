@@ -1,0 +1,14 @@
+{{extend 'layout_wide.html'}}
+{{=form.custom.begin}}
+<div class="register"><span>닉네임</span>{{=form.custom.widget.alias}}</div>
+<div class="register"><span>이메일 (아이디)</span>{{=form.custom.widget.email}}</div>
+<div class="register"><span>비밀번호</span>{{=form.custom.widget.password}}</div>
+<div class="register"><span></span>{{=form.custom.widget.password_two}}</div>
+<div class="register"><span></span>{{=form.custom.submit}}</div>
+{{=form.custom.end}}
+{{block page_name}}
+회원가입
+{{end}}
+{{block titlebar}}
+회원가입 - Feed9
+{{end}}

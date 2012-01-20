@@ -1,0 +1,74 @@
+{{extend 'layout.html'}}
+{{
+from urlparse import urlparse
+}}
+
+<ul class="pills">
+<li {{if 'hot'==sort:}}class="active"{{pass}}>{{=A('화제',_href=URL(r=request,args=[category,'hot',page]))}}</li>
+<li {{if 'new'==sort:}}class="active"{{pass}}>{{=A('최근',_href=URL(r=request,args=[category,'new',page]))}}</li>
+<li {{if 'score'==sort:}}class="active"{{pass}}>{{=A('인기',_href=URL(r=request,args=[category,'score',page]))}}</li>
+</ul>
+{{ if page>0 or (page<3 and len(news)>25):}}
+<div class="page_nav" id="pn">
+{{if page>0:}}{{=A('<<prev',_href=URL(r=request,args=[category,sort,page-1]))}}{{pass}}
+{{if page<3 and len(news)>25:}}{{=A('next>>',_href=URL(r=request,args=[category,sort,page+1]))}}{{pass}}
+</div>
+{{pass}}
+<form><input type="hidden" id="id" name="id" value="" /></form>
+
+<div id="modal-from-dom" class="modal hide fade">
+            <div class="modal-header">
+              <a href="#" class="close">&times;</a>
+              <h3>링크 내용과 URL</h3>
+            </div>
+            <div class="modal-body">
+              <textarea class="span9" onclick="this.focus();this.select()" id="textarea2" name="textarea2" rows="5"></textarea>
+            </div>
+            <div class="modal-footer" id="char_count">
+              0
+            </div>
+</div>		  
+
+{{for k,item in enumerate(news):}}{{if k==25: continue}}
+<div class="row post">
+	<div class="span2">
+		<div class="stat">
+			<div class="score" id="item{{=item.id}}">
+				{{=item.score}}
+			</div>
+			<div class="click">
+				<img src="{{=URL(r=request,c='static',f='eye.png')}}"/>  {{=item.clicks}}
+			</div>
+		</div>
+		<div class="rate">
+			  <span class="vote_up" {{if auth.user_id:}}onclick="jQuery('#id').val('{{=item.id}}');ajax('{{=URL(r=request,f='vote',args=['up',item.id])}}',['id'],'item{{=item.id}}');"{{pass}}>vote up</span>
+		  <span class="vote_down" {{if auth.user_id:}}onclick="jQuery('#id').val('{{=item.id}}');ajax('{{=URL(r=request,f='vote',args=['down',item.id])}}',['id'],'item{{=item.id}}');"{{pass}}>vote down</span>
+		</div>
+	</div>
+	<div class="span9 article">
+		<div class="row heading">
+	{{if category=='all' and item.category:}}
+	<span class="all_cat">{{=A(item.category_alias,_href=URL(r=request,f='index',args=[item.category]))}}</span>
+	{{pass}}
+  {{if item.url.strip().lower()=='self':}}
+    {{=A(item.title,_target="_blank",_href=URL(r=request,f='comments',args=[item.id]))}}
+  {{else:}}
+    {{=A(item.title,_target="_blank",_href=URL(r=request,f='bookmark',args=[item.id]))}}
+	{{url=urlparse(item.url)}}<span class="src">(<a target="_blank" href="http://{{=url.netloc}}">{{=url.netloc}}</a>)</span>{{pass}}
+		</div>
+		<div class="row footing">
+  {{=A('%i 코멘트'%item.comments,_href=URL(r=request,f='comments',args=[item.id]))}} {{=A('신고',_href=URL(r=request,f='report',args=[item.id]))}} <a onclick="$('#textarea2').val('{{=item.title.replace("'","\\'")}}'+' ('+'{{=url.netloc}}'+') '+'http://{{=request.env.http_host}}{{if item.url.strip().lower()=='self':}}{{=URL(r=request,f='comments',args=[item.id])}}{{else:}}{{=URL(r=request,f='bookmark',args=[item.id])}}{{pass}}');$('#char_count').text(function() {return $('#textarea2').val().length;});" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true">공유</a> {{if item.author==auth.user_id:}} {{=A('삭제',_href=URL(r=request,f='delete',args=[item.id]))}} {{pass}} {{=timesince(item.post_time,now)}} 전 {{=A(item.author_alias,_href=URL(r=request,f='person',args=[item.author]))}}
+		</div>
+	</div>
+</div>
+{{pass}}
+<div class="page_nav">
+{{if page>0:}}{{=A('<<prev',_href=URL(r=request,args=[category,sort,page-1]))}}{{pass}}
+{{if page<3 and len(news)>25:}}{{=A('next>>',_href=URL(r=request,args=[category,sort,page+1]))}}{{pass}}
+</div>
+{{block category_name}}
+{{=alias}}<small>{{=dec}}</small>
+{{end}}
+{{block titlebar}}
+{{=alias}} - Feed9
+{{end}}

@@ -1,0 +1,46 @@
+{{extend 'layout_mobile.html'}}
+{{
+from urlparse import urlparse
+}}
+
+<ul data-role="listview">
+{{for k,item in enumerate(news):}}{{if k==25: continue}}
+
+<li>{{if item.url.strip().lower()=='self':}}
+		<a rel='external' href="{{=URL(r=request,f='comments',args=[item.id])}}">
+	  {{else:}}
+		<a rel='external' href="{{=URL(r=request,f='bookmark',args=[item.id])}}">
+	{{pass}}
+					<h3>
+					{{url=urlparse(item.url)}}{{=url.netloc}}
+					</h3>
+					<p>{{if category=='all' and item.category:}}
+					{{=item.category_alias}}
+					{{pass}}</p>
+					<p style="white-space:normal;">
+					<strong>{{=item.title}}</strong>
+					</p>
+					<p class="ui-li-aside"><strong>{{=timesince(item.post_time,now)}}</strong> 전 </p>
+</a>		
+</li>
+{{pass}}
+</ul>
+<div class="page_nav">
+{{if page>0:}}
+<a href="{{=URL(r=request,args=[category,sort,page-1])}}" data-role="button" data-inline="true" data-icon="arrow-l">이전</a>{{pass}}
+{{if page<3 and len(news)>25:}}
+<a href="{{=URL(r=request,args=[category,sort,page+1])}}" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">다음</a>
+{{pass}}
+</div>
+{{block page_name}}
+{{=alias}}
+{{end}}
+{{block titlebar}}
+{{=alias}} - Feed9
+{{end}}
+
+{{block footer_nav}}
+<li {{if 'hot'==sort:}}class="active"{{pass}}>{{=A('화제',_href=URL(r=request,args=[category,'hot',page]))}}</li>
+<li {{if 'new'==sort:}}class="active"{{pass}}>{{=A('최근',_href=URL(r=request,args=[category,'new',page]))}}</li>
+<li {{if 'score'==sort:}}class="active"{{pass}}>{{=A('인기',_href=URL(r=request,args=[category,'score',page]))}}</li>
+{{end}}

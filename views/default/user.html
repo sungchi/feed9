@@ -1,0 +1,30 @@
+{{extend 'layout.html'}}
+<div id="web2py_user_form">
+{{if request.args(0)=='reset_password':}}
+{{=form.custom.begin}}
+<div class="new_pswd">{{=form.custom.widget.new_password}}</div>
+<div class="new_pswd">{{=form.custom.widget.new_password2}}</div>
+<div class="new_pswd_submit">{{=form.custom.submit}}</div>
+{{=form.custom.end}}
+{{else:}}
+{{=form}}
+{{pass}}
+{{if request.args(0)=='login':}}
+{{if not 'register' in auth.settings.actions_disabled:}}
+<br/><a href="{{=URL(r=request,args='register')}}">register</a>
+{{pass}}
+{{if not 'request_reset_password' in auth.settings.actions_disabled:}}
+<br/><a href="{{=URL(r=request,args='request_reset_password')}}">lost password</a>
+{{pass}}
+{{pass}}
+</div>
+
+<script language="javascript">
+<!--
+ jQuery("#web2py_user_form input:visible:enabled:first").focus();
+//-->
+</script> 
+
+{{block page_name}}
+{{=T( request.args(0).replace('_',' ').capitalize() )}}
+{{end}}

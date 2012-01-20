@@ -1,0 +1,15 @@
+{{extend 'layout_wide.html'}}
+{{=login_form.custom.begin}}
+<div class="login">{{=login_form.custom.widget.email}}</div>
+<div class="login">{{=login_form.custom.widget.password}}</div>
+<div class="login">{{=A('비밀번호 찾기',_class="reset_link",_href=URL(r=request,f='reset_password'))}} <label class="login_remember"><input class="checkbox" id="auth_user_remember" name="remember" type="checkbox" value="on" /> <span>아이디 저장</span></label></div>
+<div class="login">{{=login_form.custom.submit}}</div>
+{{=login_form.custom.end}}
+
+
+{{block titlebar}}
+로그인 - Feed9
+{{end}}
+{{block page_name}}
+로그인
+{{end}}

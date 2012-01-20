@@ -1,0 +1,9 @@
+{{extend 'layout_chrome.html'}}
+{{=login_form.custom.begin}}
+<div class="chrome">
+<div class="login">{{=login_form.custom.widget.email}}</div>
+<div class="login">{{=login_form.custom.widget.password}}</div>
+<div class="login">{{=A('회원가입',_class="reset_link",_target="_blank",_href=URL(r=request,f='register'))}} <label class="login_remember"><input class="checkbox" id="auth_user_remember" name="remember" type="checkbox" value="on" /> <span>아이디 저장</span></label></div>
+<div class="login">{{=login_form.custom.submit}}</div>
+</div>
+{{=login_form.custom.end}}
