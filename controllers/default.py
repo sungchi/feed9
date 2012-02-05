@@ -261,7 +261,7 @@ def comments():
     except: redirect(URL(r=request,f='index'))
     if auth.user_id:
         form=SQLFORM(db.comment,fields=['body'],labels={'body':''})
-        form.element('textarea[name=body]')['_class']='text span11'
+        form.element('textarea[name=body]')['_class']='text span7'
         form.element('textarea[name=body]')['_cols']='70'
         form.element('textarea[name=body]')['_rows']='4'
         form.element('textarea[name=body]')['_placeholder']='코멘트 남기기...'
@@ -310,7 +310,7 @@ def edit_comment():
         if not comment.author==auth.user_id: raise Exception
     except: redirect(URL(r=request,f='index'))
     form=SQLFORM(db.comment,comment,fields=['body'],showid=False,deletable=True,labels={'body':'Comment'})
-    form.element('textarea[name=body]')['_class']='text span14'
+    form.element('textarea[name=body]')['_class']='text span11'
     form.element('textarea[name=body]')['_cols']='70'
     form.element('textarea[name=body]')['_rows']='4'
     form.element('input[type=submit]')['_class']='btn'

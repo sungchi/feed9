@@ -593,13 +593,14 @@ footer a:hover {text-decoration: none; color: #333;}
 #pn { margin-top: -47px; }
 .page_nav a,.cmt_util a { text-decoration: none; }
 .cmt_body { margin-bottom: 5px;}
-.cmt_util { text-align: right; }
+.cmt_util { text-align: right; padding-right: 15px; }
 .sub_cmt {margin-left: 30px;}
 .span_cmt { width: 78px; }
 .span_cmt .rate { margin-right: 15px; }
 .span_cmt .stat { width: 40%; text-align: left; }
 .span_cmt .stat .score { font: bold 20px/50px arial; }
-.sub_cmt { width:94%; }
+.sub_cmt { width:89%; }
+.sub_cmt .article,.cmt .article { padding-left: 98px;}
 .cmt_del label { width: 90px; }
 .login, .register, .new_pswd,.profile { margin-bottom: 10px; }
 .register span { display:inline-block; width: 100px; text-align: right; padding-right: 10px; }
@@ -611,7 +612,7 @@ footer a:hover {text-decoration: none; color: #333;}
 .post_input { margin-bottom: 10px; }
 .post_input .span11 { height:25px; width: 100%; }
 .post_input #post_radio { text-align: left; width: 100px; }
-input[name="category"][type="radio"] { display:inline; }
+input[name="category"][type="radio"],input[name="delete_this_record"] { display:inline; }
 .post_submit { clear:both; margin-top: 20px; text-align: right; }
 .chrome-ext .post_submit {margin-right: 80px;}
 .navbar .nav > .cat-page {display:none;}
@@ -628,3 +629,4 @@ footer {margin-top:20px;}
 .login_remember #auth_user_remember {display: inline;}
 .chrome .login_remember {line-height: 26px;}
 .modal-body .span5 { width: 98%; }
+.text.span7 { width:95%; }

@@ -8,7 +8,7 @@ from urlparse import urlparse
 {{if not tree.has_key(id): return}}
 
 {{for item in tree[id]:}}
-<div class="row post">
+<div class="row post cmt">
 	<div class="span_cmt">
 	<div class="stat">
 	<div class="score" id="item{{=item.id}}">
@@ -58,7 +58,7 @@ from urlparse import urlparse
 
 {{if item:}}
 <div class="row post">
-	<div class="span2">
+	<div class="span1">
 		<div class="stat">
 			<div class="score" id="item{{=item.id}}">
 				{{=item.score}}
@@ -73,7 +73,7 @@ from urlparse import urlparse
 			
 		</div>
 	</div>
-	<div class="span9 article">
+	<div class="span7 article">
 		<div class="row heading">
 	{{if item.category:}}
 	<span class="all_cat">{{=A(item.category_alias,_href=URL(r=request,f='index',args=[item.category]))}}</span>
