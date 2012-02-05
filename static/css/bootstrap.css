@@ -678,3 +678,4 @@ footer {margin-top:20px;}
 .chrome-ext.span7 { margin-left: 0px;}
 .login_remember #auth_user_remember {display: inline;}
 .chrome .login_remember {line-height: 26px;}
+.modal-body .span5 { width: 98%; }
