@@ -664,6 +664,7 @@ footer a:hover {text-decoration: none; color: #333;}
 .post_input #post_radio { text-align: left; width: 100px; }
 input[name="category"][type="radio"] { display:inline; }
 .post_submit { clear:both; margin-top: 20px; text-align: right; }
+.chrome-ext .post_submit {margin-right: 80px;}
 .navbar .nav > .cat-page {display:none;}
 h3.cat3 { line-height: 36px; margin-top: 10px; }
 .facebook_like { margin-top: 100px; }
@@ -674,3 +675,6 @@ footer {margin-top:20px;}
 .cat-page-list {margin-top:20px;}
 .cat_list.cat-page-list a {margin-bottom:8px;}
 .about p {max-width:500px;}
+.chrome-ext.span7 { margin-left: 0px;}
+.login_remember #auth_user_remember {display: inline;}
+.chrome .login_remember {line-height: 26px;}

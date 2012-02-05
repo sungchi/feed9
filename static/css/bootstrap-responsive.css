@@ -103,6 +103,7 @@
   .article .footing {font-size:13px;}
   h1 {font-size: 24px;}
   h1 small {font-size:14px;}
+  .post_input #post_radio {width:90px;}
 }
 @media (min-width: 768px) and (max-width: 980px) {
   .row {

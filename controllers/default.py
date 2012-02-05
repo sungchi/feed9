@@ -385,11 +385,11 @@ def post_chrome():
     form=SQLFORM(db.news,fields=['url','title','category'])
     form.vars.author=auth.user_id
     form.vars.author_alias=auth.user.alias
-    form.element('input[name=url]')['_class']='span9'
+    form.element('input[name=url]')['_class']='span6'
     form.element('input[name=url]')['_placeholder']='URL 주소'
     #form.element('input[name=url]')['_value']='http://'+request.args[1]
     form.element('input[name=url]')['_value']=request.vars.url
-    form.element('input[name=title]')['_class']='span9'
+    form.element('input[name=title]')['_class']='span6'
     form.element('input[name=title]')['_placeholder']='링크 설명을 입력하세요.'
     #form.element('input[name=title]')['_value']=request.args[0]
     form.element('input[name=title]')['_value']=request.vars.title
