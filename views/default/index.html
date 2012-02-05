@@ -3,7 +3,7 @@
 from urlparse import urlparse
 }}
 
-<ul class="pills">
+<ul class="nav nav-pills">
 <li {{if 'hot'==sort:}}class="active"{{pass}}>{{=A('화제',_href=URL(r=request,args=[category,'hot',page]))}}</li>
 <li {{if 'new'==sort:}}class="active"{{pass}}>{{=A('최근',_href=URL(r=request,args=[category,'new',page]))}}</li>
 <li {{if 'score'==sort:}}class="active"{{pass}}>{{=A('인기',_href=URL(r=request,args=[category,'score',page]))}}</li>
@@ -31,7 +31,7 @@ from urlparse import urlparse
 
 {{for k,item in enumerate(news):}}{{if k==25: continue}}
 <div class="row post">
-	<div class="span2">
+	<div class="span1">
 		<div class="stat">
 			<div class="score" id="item{{=item.id}}">
 				{{=item.score}}
@@ -45,7 +45,7 @@ from urlparse import urlparse
 		  <span class="vote_down" {{if auth.user_id:}}onclick="jQuery('#id').val('{{=item.id}}');ajax('{{=URL(r=request,f='vote',args=['down',item.id])}}',['id'],'item{{=item.id}}');"{{pass}}>vote down</span>
 		</div>
 	</div>
-	<div class="span9 article">
+	<div class="span7 article">
 		<div class="row heading">
 	{{if category=='all' and item.category:}}
 	<span class="all_cat">{{=A(item.category_alias,_href=URL(r=request,f='index',args=[item.category]))}}</span>
@@ -57,7 +57,7 @@ from urlparse import urlparse
 	{{url=urlparse(item.url)}}<span class="src">(<a target="_blank" href="http://{{=url.netloc}}">{{=url.netloc}}</a>)</span>{{pass}}
 		</div>
 		<div class="row footing">
-  {{=A('%i 코멘트'%item.comments,_href=URL(r=request,f='comments',args=[item.id]))}} {{=A('신고',_href=URL(r=request,f='report',args=[item.id]))}} <a onclick="$('#textarea2').val('{{=item.title.replace("'","\\'")}}'+' ('+'{{=url.netloc}}'+') '+'http://{{=request.env.http_host}}{{if item.url.strip().lower()=='self':}}{{=URL(r=request,f='comments',args=[item.id])}}{{else:}}{{=URL(r=request,f='bookmark',args=[item.id])}}{{pass}}');$('#char_count').text(function() {return $('#textarea2').val().length;});" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true">공유</a> {{if item.author==auth.user_id:}} {{=A('삭제',_href=URL(r=request,f='delete',args=[item.id]))}} {{pass}} {{=timesince(item.post_time,now)}} 전 {{=A(item.author_alias,_href=URL(r=request,f='person',args=[item.author]))}}
+  {{=A('%i 코멘트'%item.comments,_href=URL(r=request,f='comments',args=[item.id]))}} {{=A('신고',_href=URL(r=request,f='report',args=[item.id]))}} <a class="share" onclick="$('#textarea2').val('{{=item.title.replace("'","\\'")}}'+' ('+'{{=url.netloc}}'+') '+'http://{{=request.env.http_host}}{{if item.url.strip().lower()=='self':}}{{=URL(r=request,f='comments',args=[item.id])}}{{else:}}{{=URL(r=request,f='bookmark',args=[item.id])}}{{pass}}');$('#char_count').text(function() {return $('#textarea2').val().length;});" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true">공유</a> {{if item.author==auth.user_id:}} {{=A('삭제',_href=URL(r=request,f='delete',args=[item.id]))}} {{pass}} {{=timesince(item.post_time,now)}} 전 {{=A(item.author_alias,_href=URL(r=request,f='person',args=[item.author]))}}
 		</div>
 	</div>
 </div>

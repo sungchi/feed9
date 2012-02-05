@@ -1,5 +1,6 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="/{{=request.application}}/static/dropdown.js" type="text/javascript" charset="utf-8"></script>
+<script src="/{{=request.application}}/static/bootstrap-collapse.js" type="text/javascript" charset="utf-8"></script>
+<script src="/{{=request.application}}/static/bootstrap-dropdown.js" type="text/javascript" charset="utf-8"></script>
 <script src="/{{=request.application}}/static/bootstrap-modal.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript"><!--
 /* Written by Massimo Di Pierro. Here for backward compatibility. */
@@ -19,7 +20,8 @@ function ajax(u,s,t) {
 } 
 String.prototype.reverse = function () {return this.split('').reverse().join('');};
 $(document).ready(function() {
- $('#char_count').text(function() {return $('#textarea2').val().length;});
+setTimeout(scrollTo, 0, 0, 1);
+$('#char_count').text(function() {return $('#textarea2').val().length;});
 $('#textarea2').keyup(function() {
                 var len = this.value.length;
                 $('#char_count').text(len);

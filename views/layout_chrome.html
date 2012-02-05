@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="author" content="All: feed9 [www.feed9.com]">
-    <link rel="stylesheet" media="screen,projection" type="text/css" href="{{=URL(r=request,c='static',f='css/main.css')}}" />
+    <link href="{{=URL(r=request,c='static',f='css/bootstrap.css')}}" rel="stylesheet">
     <link rel="shortcut icon" href="{{=URL(r=request,c='static',f='favicon.ico')}}" />
 	<title>{{block titlebar}}Feed9{{end}}</title>
 	<script type="text/javascript">
@@ -23,11 +23,11 @@
 </head>
 
 <body>
-    <div class="span9">
+    <div class="span7">
 
       <div class="content">
         <div class="row wide">
-          <div class="span9">
+          <div class="span7">
 			{{include}}        
           </div>
         </div>

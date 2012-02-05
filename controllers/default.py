@@ -4,9 +4,9 @@ now=time.time()
 
 def author_func():
     login_form=auth.login(next=URL(r=request,f='index'))
-    login_form.element('input[name=email]')['_class']='span3'
+    login_form.element('input[name=email]')['_class']='span2'
     login_form.element('input[name=email]')['_placeholder']='email'
-    login_form.element('input[name=password]')['_class']='span3'
+    login_form.element('input[name=password]')['_class']='span2'
     login_form.element('input[name=password]')['_placeholder']='password'
     login_form.element('input[type=submit]')['_class']='btn'
     login_form.element('input[type=submit]')['_value']='로그인'
@@ -57,9 +57,6 @@ def logout():
 
 @cache(request.env.path_info, time_expire=10, cache_model=cache.ram)
 def index():
-    if request.user_agent().is_mobile:
-        #response.view.replace('default/index.html','default/index.mobile.html')
-        response.view='default/index.mobile.html'
     sorts={
            'hot':~db.news.hotness,
            'score':~db.news.score,
@@ -117,9 +114,9 @@ def post():
     form=SQLFORM(db.news,fields=['url','title','category'])
     form.vars.author=auth.user_id
     form.vars.author_alias=auth.user.alias
-    form.element('input[name=url]')['_class']='span14'
+    form.element('input[name=url]')['_class']='span11'
     form.element('input[name=url]')['_placeholder']='URL 주소'
-    form.element('input[name=title]')['_class']='span14'
+    form.element('input[name=title]')['_class']='span11'
     form.element('input[name=title]')['_placeholder']='링크 설명을 입력하세요.'
     form.element('input[type=submit]')['_class']='btn large'
     form.element('input[type=submit]')['_value']='올리기'
@@ -420,3 +417,8 @@ def login_chrome():
     login_form.element('input[type=submit]')['_class']='btn'
     login_form.element('input[type=submit]')['_value']='로그인'
     return dict(cat_list=cat_list,login_form=login_form)
+
+def category():
+    cat_list=[[r.alias,r.name] for r in db().select(db.category.ALL)]
+    form = author_func()
+    return dict(cat_list=cat_list,login_form=form)

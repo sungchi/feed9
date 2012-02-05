@@ -1,0 +1,16 @@
+{{extend 'layout_wide.html'}}
+{{
+from urlparse import urlparse
+}}
+	{{if cat_list:}}	
+			<div class="cat_list cat-page-list">
+    		{{for category in cat_list:}}
+			{{=A(category[0],_href=URL(r=request,f='index',args=[category[1]]))}}
+    		{{pass}}
+			</div>
+			{{pass}}
+
+
+{{block page_name}}
+카테고리 목록
+{{end}}
