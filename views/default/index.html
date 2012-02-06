@@ -4,9 +4,9 @@ from urlparse import urlparse
 }}
 
 <ul class="nav nav-pills">
-<li {{if 'hot'==sort:}}class="active"{{pass}}>{{=A('화제',_href=URL(r=request,args=[category,'hot',page]))}}</li>
-<li {{if 'new'==sort:}}class="active"{{pass}}>{{=A('최근',_href=URL(r=request,args=[category,'new',page]))}}</li>
-<li {{if 'score'==sort:}}class="active"{{pass}}>{{=A('인기',_href=URL(r=request,args=[category,'score',page]))}}</li>
+<li rel="tooltip" data-original-title="짧은 시간에 많이 본 링크" {{if 'hot'==sort:}}class="active"{{pass}}>{{=A('화제',_href=URL(r=request,args=[category,'hot',page]))}}</li>
+<li rel="tooltip" data-original-title="최근에 올라온 링크" {{if 'new'==sort:}}class="active"{{pass}}>{{=A('최근',_href=URL(r=request,args=[category,'new',page]))}}</li>
+<li rel="tooltip" data-original-title="꾸준히 인기를 얻은 링크" {{if 'score'==sort:}}class="active"{{pass}}>{{=A('인기',_href=URL(r=request,args=[category,'score',page]))}}</li>
 </ul>
 {{ if page>0 or (page<3 and len(news)>25):}}
 <div class="page_nav" id="pn">
@@ -41,8 +41,8 @@ from urlparse import urlparse
 			</div>
 		</div>
 		<div class="rate">
-			  <span class="vote_up" {{if auth.user_id:}}onclick="jQuery('#id').val('{{=item.id}}');ajax('{{=URL(r=request,f='vote',args=['up',item.id])}}',['id'],'item{{=item.id}}');"{{pass}}>vote up</span>
-		  <span class="vote_down" {{if auth.user_id:}}onclick="jQuery('#id').val('{{=item.id}}');ajax('{{=URL(r=request,f='vote',args=['down',item.id])}}',['id'],'item{{=item.id}}');"{{pass}}>vote down</span>
+			  <span rel="tooltip" data-original-title="추천(로그인)" class="vote_up" {{if auth.user_id:}}onclick="jQuery('#id').val('{{=item.id}}');ajax('{{=URL(r=request,f='vote',args=['up',item.id])}}',['id'],'item{{=item.id}}');"{{pass}}>vote up</span>
+		  <span rel="tooltip" data-original-title="비추(로그인)" class="vote_down" {{if auth.user_id:}}onclick="jQuery('#id').val('{{=item.id}}');ajax('{{=URL(r=request,f='vote',args=['down',item.id])}}',['id'],'item{{=item.id}}');"{{pass}}>vote down</span>
 		</div>
 	</div>
 	<div class="span7 article">

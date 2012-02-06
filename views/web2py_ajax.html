@@ -2,6 +2,7 @@
 <script src="/{{=request.application}}/static/bootstrap-collapse.js" type="text/javascript" charset="utf-8"></script>
 <script src="/{{=request.application}}/static/bootstrap-dropdown.js" type="text/javascript" charset="utf-8"></script>
 <script src="/{{=request.application}}/static/bootstrap-modal.js" type="text/javascript" charset="utf-8"></script>
+<script src="/{{=request.application}}/static/bootstrap-tooltip.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript"><!--
 /* Written by Massimo Di Pierro. Here for backward compatibility. */
 function popup(url) {
@@ -32,5 +33,7 @@ $('input.integer').attr('onkeyup',"this.value=this.value.reverse().replace(/[^0-
 $('input.double').attr('onkeyup',"this.value=this.value.reverse().replace(/[^0-9\-\.]|[\-](?=.)|[\.](?=[0-9]*[\.])/g,'').reverse();");
 $(".topbar").dropdown();
 try {$("input.date").datepicker({dateFormat: '{{=T('yy-mm-dd')}}'});} catch(e) {};
+$(".nav-pills").tooltip({selector: "li[rel=tooltip]"});
+$(".rate").tooltip({selector: "span[rel=tooltip]",placement:"right"});
 });
 //--></script>
