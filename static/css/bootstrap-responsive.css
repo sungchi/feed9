@@ -105,6 +105,7 @@
   h1 small {font-size:14px;}
   .post_input #post_radio {width:90px;}
   .text.span11 { width:100%; }
+  .sub_cmt .article, .cmt .article { padding-left:0px; }
 }
 @media (min-width: 768px) and (max-width: 980px) {
   .row {
