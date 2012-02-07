@@ -4,8 +4,8 @@ from urlparse import urlparse
 }}
 
 <ul class="nav nav-pills">
-<li rel="tooltip" data-original-title="짧은 시간에 많이 본 링크" {{if 'hot'==sort:}}class="active"{{pass}}>{{=A('화제',_href=URL(r=request,args=[category,'hot',page]))}}</li>
 <li rel="tooltip" data-original-title="최근에 올라온 링크" {{if 'new'==sort:}}class="active"{{pass}}>{{=A('최근',_href=URL(r=request,args=[category,'new',page]))}}</li>
+<li rel="tooltip" data-original-title="짧은 시간에 많이 본 링크" {{if 'hot'==sort:}}class="active"{{pass}}>{{=A('화제',_href=URL(r=request,args=[category,'hot',page]))}}</li>
 <li rel="tooltip" data-original-title="꾸준히 인기를 얻은 링크" {{if 'score'==sort:}}class="active"{{pass}}>{{=A('인기',_href=URL(r=request,args=[category,'score',page]))}}</li>
 </ul>
 {{ if page>0 or (page<3 and len(news)>25):}}
