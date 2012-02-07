@@ -64,7 +64,7 @@ def index():
     try: page=int(request.args[2])
     except: page=0
     try: sort=request.args[1]
-    except: sort='hot' 
+    except: sort='new' 
     orderby=sorts[sort]
     limitby=(25*page,25*(page+1)+1)
     try: 
