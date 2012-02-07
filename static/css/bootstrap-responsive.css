@@ -97,7 +97,7 @@
     margin: 0;
   }
   div.navbar {margin-bottom:0px;}
-  .stat , .rate,  div.span3.sidebar,  .share,  .navbar .nav > li.addon {display:none;}
+  .stat , .rate,  div.span3.sidebar,  .share,  .navbar .nav > li.addon,.span1.post-btn {display:none;}
   .article .row { padding-left: 0px;}
   .navbar .nav > li.cat-page {display:block;}
   .article .footing {font-size:13px;}
@@ -106,6 +106,7 @@
   .post_input #post_radio {width:90px;}
   .text.span11 { width:100%; }
   .sub_cmt .article, .cmt .article { padding-left:0px; }
+  .row .span6.article {width:100%;}
 }
 @media (min-width: 768px) and (max-width: 980px) {
   .row {
@@ -334,6 +335,9 @@
   .login .span2 { width: 300px; height: 25px; }
   .login .login_remember {line-height: 28px;}
   .login #auth_user_remember { display: inline; }
+  .span1.post-btn { margin-left: 0px; width: 60px;}
+  .btn-group .btn { display:none; }
+  .span6.article {width:414px;}
 }
 @media (min-width: 980px) {
   .nav-collapse.collapse {
@@ -343,7 +347,7 @@
   .login .login_remember {line-height: 28px;}
   .login #auth_user_remember { display: inline; }
   .login-row .span2 {width:160px;}
-  
+  .row.heading { padding-right:5px; }
 }
 @media (min-width: 1200px) {
   .row {
