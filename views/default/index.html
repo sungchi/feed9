@@ -41,8 +41,8 @@ from urlparse import urlparse
 			</div>
 		</div>
 		<div class="rate">
-			  <span rel="tooltip" data-original-title="추천(로그인)" class="vote_up" {{if auth.user_id:}}onclick="jQuery('#id').val('{{=item.id}}');ajax('{{=URL(r=request,f='vote',args=['up',item.id])}}',['id'],'item{{=item.id}}');"{{pass}}>vote up</span>
-		  <span rel="tooltip" data-original-title="비추(로그인)" class="vote_down" {{if auth.user_id:}}onclick="jQuery('#id').val('{{=item.id}}');ajax('{{=URL(r=request,f='vote',args=['down',item.id])}}',['id'],'item{{=item.id}}');"{{pass}}>vote down</span>
+			  <span rel="tooltip" {{if auth.user_id:}}data-original-title="추천"{{else:}}data-original-title="추천(로그인필요)"{{pass}} class="vote_up" {{if auth.user_id:}}onclick="jQuery('#id').val('{{=item.id}}');ajax('{{=URL(r=request,f='vote',args=['up',item.id])}}',['id'],'item{{=item.id}}');"{{pass}}>vote up</span>
+		  <span rel="tooltip" {{if auth.user_id:}}data-original-title="비추"{{else:}}data-original-title="비추(로그인필요)"{{pass}} class="vote_down" {{if auth.user_id:}}onclick="jQuery('#id').val('{{=item.id}}');ajax('{{=URL(r=request,f='vote',args=['down',item.id])}}',['id'],'item{{=item.id}}');"{{pass}}>vote down</span>
 		</div>
 	</div>
 	<div class="span7 article">

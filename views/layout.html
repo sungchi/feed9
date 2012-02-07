@@ -113,13 +113,17 @@
 			{{include}}        
           </div>
           <div class="span3 sidebar">
+			<div class="side-signup">
     		{{if auth.user_id:}}
 			{{=A(I(_class='icon-edit icon-white'),'  새로 올리기',_class='btn btn-large btn-success',_href=URL(r=request,f='post'))}}
 			{{else:}}
 			{{=A(I(_class='icon-user icon-white'),'  초간단 가입',_class='btn btn-large btn-primary',_href=URL(r=request,f='register'))}}
     		{{pass}}
-
-    		<h3 class="cat3">카테고리</h3>
+			</div>
+			<div class="ad1">
+			<SCRIPT type='text/javascript' src='http://rsense-ad.realclick.co.kr/rsense/rsense_ad.js?rid=491652331361&stamp=1328574731' charset='euc-kr'></SCRIPT>
+    		</div>
+			<h3 class="cat3">카테고리</h3>
 			{{if cat_list:}}	
 			<div class="cat_list">
     		{{for category in cat_list:}}
@@ -127,6 +131,7 @@
     		{{pass}}
 			</div>
 			{{pass}}
+			
           </div>
         </div>
       </div>
