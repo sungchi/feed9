@@ -11,10 +11,15 @@ import mail_setting
 # if running on Google App Engine
 if settings.web2py_runtime_gae:
     from gluon.contrib.gql import *
+    from gluon.contrib.gae_memcache import MemcacheClient
+    from gluon.contrib.memdb import MEMDB
+    cache.memcache = MemcacheClient(request)
+    cache.ram = cache.disk = cache.memcache
     # connect to Google BigTable
     db = DAL('gae')
     # and store sessions there
-    session.connect(request, response, db=db)
+    #session.connect(request, response, db=db)
+    session.connect(request,response,MEMDB(cache.memcache))
 else:
     # if not, use SQLite or other DB
     db = DAL('sqlite://storage.sqlite')
