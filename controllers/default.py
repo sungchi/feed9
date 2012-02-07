@@ -101,7 +101,7 @@ def index():
 
     return response.render(dict(login_form=form,cat_list=cat_list,category=cat,alias=alias,news=news,dec=dec,sort=sort,page=page))
 
-@cache(request.env.path_info, time_expire=3600, cache_model=cache.ram)
+@cache(request.env.path_info, time_expire=60, cache_model=cache.ram)
 def bookmark():
     try: item=db(db.news.id==request.args[0]).select()[0]
     except: redirect(URL(r=request,f='index'))
