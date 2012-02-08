@@ -14,7 +14,7 @@ def author_func():
 
 def register():
     if auth.user_id:
-        redirect(URL(r=request,f='index'))
+        redirect(URL(r=request,f='profile'))
     login_form = author_func()
     form = auth.register()
     form.element('input[name=alias]')['_class']='span3'
@@ -30,6 +30,8 @@ def register():
     return dict(login_form=login_form,form=form)
 
 def profile():
+    if not auth.user_id:
+        redirect(URL(r=request,f='login'))
     form=auth.profile()
     form.element('input[name=alias]')['_class']='span3'
     form.element('input[name=email]')['_class']='span3'
@@ -46,9 +48,10 @@ def user():
 
 def login():
     if auth.user_id:
-        redirect(URL(r=request,f='index'))
+        redirect(session.old_referer)
     cat_list=[[r.alias,r.name] for r in db().select(db.category.ALL)]
     login_form=author_func()
+    session.old_referer = request.env.http_referer
     return dict(cat_list=cat_list,login_form=login_form)
 
 
