@@ -115,13 +115,15 @@ def post():
     form.vars.author=auth.user_id
     form.vars.author_alias=auth.user.alias
     form.element('input[name=url]')['_class']='span11'
-    form.element('input[name=url]')['_placeholder']='URL 주소'
+    form.element('input[name=url]')['_placeholder']='URL 주소 (입력하지 않으면 스스로를 가르키는 링크)'
     form.element('input[name=title]')['_class']='span11'
     form.element('input[name=title]')['_placeholder']='링크 설명을 입력하세요.'
     form.element('input[type=submit]')['_class']='btn large'
     form.element('input[type=submit]')['_value']='올리기'
     if request.vars.category:
         form.vars.category_alias=db(db.category.name==request.vars.category).select()[0].alias
+    if not request.vars.url:
+        request.vars.url='self'
     login_form = author_func()
     if form.accepts(request.vars,session):
         session.flash='news posted'
@@ -386,7 +388,7 @@ def post_chrome():
     form.vars.author=auth.user_id
     form.vars.author_alias=auth.user.alias
     form.element('input[name=url]')['_class']='span6'
-    form.element('input[name=url]')['_placeholder']='URL 주소'
+    form.element('input[name=url]')['_placeholder']='URL 주소 (입력하지 않으면 스스로를 가르키는 링크)'
     #form.element('input[name=url]')['_value']='http://'+request.args[1]
     form.element('input[name=url]')['_value']=request.vars.url
     form.element('input[name=title]')['_class']='span6'
@@ -398,6 +400,8 @@ def post_chrome():
     form.element('input[type=submit]')['_action']=URL(r=request,args=request.args)
     if request.vars.category:
         form.vars.category_alias=db(db.category.name==request.vars.category).select()[0].alias
+    if not request.vars.url:
+        request.vars.url='self'
     login_form = author_func()
     if form.accepts(request,session):
         return "올라간듯"+'  <a target="_blank" href="http://www.feed9.com/mylink/">'+"업로드 페이지로 이동"+"</a>"

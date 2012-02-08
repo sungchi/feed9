@@ -80,7 +80,7 @@ db.define_table('news',
    Field('title',length=2048),
    Field('flagged','boolean',default=False))
 
-db.news.url.requires=[IS_NOT_EMPTY()]
+#db.news.url.requires=[IS_NOT_EMPTY()]
 db.news.title.requires=IS_NOT_EMPTY()
 
 db.define_table('comment',
