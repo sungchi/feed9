@@ -3,13 +3,14 @@ import time
 now=time.time()
 
 def author_func():
-    login_form=auth.login(next=URL(r=request,f='index'))
+    login_form=auth.login(next=request.env.http_referer)
     login_form.element('input[name=email]')['_class']='span2'
     login_form.element('input[name=email]')['_placeholder']='email'
     login_form.element('input[name=password]')['_class']='span2'
     login_form.element('input[name=password]')['_placeholder']='password'
     login_form.element('input[type=submit]')['_class']='btn'
     login_form.element('input[type=submit]')['_value']='로그인'
+    session.old_referer = request.env.http_referer
     return login_form
 
 def register():
@@ -51,12 +52,11 @@ def login():
         redirect(session.old_referer)
     cat_list=[[r.alias,r.name] for r in db().select(db.category.ALL)]
     login_form=author_func()
-    session.old_referer = request.env.http_referer
     return dict(cat_list=cat_list,login_form=login_form)
 
 
 def logout():
-    return auth.logout(next=URL(r=request,f='index'))
+    return auth.logout(next=request.env.http_referer)
 
 @cache(request.env.path_info, time_expire=10, cache_model=cache.ram)
 def index():
