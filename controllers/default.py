@@ -15,7 +15,7 @@ def author_func():
 
 def register():
     if auth.user_id:
-        redirect(URL(r=request,f='profile'))
+        redirect(URL(session.old_referer))
     login_form = author_func()
     form = auth.register()
     form.element('input[name=alias]')['_class']='span3'
@@ -28,6 +28,7 @@ def register():
     form.element('input[name=password_two]')['_placeholder']='비밀번호 확인'
     form.element('input[type=submit]')['_class']='btn'
     form.element('input[type=submit]')['_value']='회원가입'
+    session.old_referer = request.env.http_referer
     return dict(login_form=login_form,form=form)
 
 def profile():
