@@ -15,7 +15,7 @@ def author_func():
 
 def register():
     if auth.user_id:
-        redirect(URL(session.old_referer))
+        redirect(session.old_referer)
     login_form = author_func()
     form = auth.register()
     form.element('input[name=alias]')['_class']='span3'
