@@ -4,7 +4,7 @@
 <div class="post_input">{{=form.custom.widget.url}}</div>
 <div class="post_input">{{=form.custom.widget.title}}</div>
 <div class="post_input">
-<select>
+<select name="category">
  <option value="">없음</option>
 {{for item in cat_list:}}
  <option value="{{=item[1]}}" id="{{=item[1]}}">{{=item[0]}}</option>
