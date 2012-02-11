@@ -60,7 +60,7 @@ auth.define_tables(username=False)
 db.define_table('category',
    Field('name'),
    Field('alias',default='새 카테고리'),
-   Field('description','text'))
+   Field('description'))
 
 db.category.name.requires=[IS_MATCH('[a-z_]+'),
                            IS_NOT_IN_DB(db,db.category.name)]

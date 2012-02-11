@@ -4,11 +4,13 @@
 <div class="post_input">{{=form.custom.widget.url}}</div>
 <div class="post_input">{{=form.custom.widget.title}}</div>
 <div class="post_input">
-<label id="post_radio"><input type="radio" name="category" value="" id="" checked="checked" /><span> 없음</span></label>
+<select>
+ <option value="">없음</option>
 {{for item in cat_list:}}
-<label id="post_radio"><input type="radio" name="category" value="{{=item[1]}}" id="{{=item[1]}}"/><span> {{=item[0]}}</span>
-</label>
+ <option value="{{=item[1]}}" id="{{=item[1]}}">{{=item[0]}}</option>
 {{pass}}
+</select>
+
 </div>
 <div class="post_submit">{{=form.custom.submit}}</div>
 {{=form.custom.end}}
