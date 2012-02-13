@@ -47,7 +47,7 @@ from urlparse import urlparse
   {{if item.url.strip().lower()=='self':}}
     {{=A(item.title,_href=URL(r=request,f='comments',args=[item.id]))}}
   {{else:}}
-    {{=A(item.title,_target="_blank",_href=URL(r=request,f='bookmark',args=[item.id]))}}
+    {{=A(item.title,_href=URL(r=request,f='bookmark',args=[item.id]))}}
 	{{url=urlparse(item.url)}}<span class="src">(<a target="_blank" href="http://{{=url.netloc}}">{{=url.netloc}}</a>)</span>{{pass}}
 		</div>
 		<div class="row footing">
