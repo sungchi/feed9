@@ -57,7 +57,7 @@ from urlparse import urlparse
 	{{url=urlparse(item.url)}}<span class="src">(<a target="_blank" href="http://{{=url.netloc}}">{{=url.netloc}}</a>)</span>{{pass}}
 		</div>
 		<div class="row footing">
-  {{=A('%i 코멘트'%item.comments,_href=URL(r=request,f='comments',args=[item.id]))}} <a class="share" onclick="$('#textarea2').val('{{=item.title.replace("'","\\'")}}'+{{if item.url.strip().lower()!='self':}}' ('+'{{=url.netloc}}'+') '+{{else:}}' '+{{pass}}'http://{{=request.env.http_host}}{{if item.url.strip().lower()=='self':}}{{=URL(r=request,f='comments',args=[item.id])}}{{else:}}{{=URL(r=request,f='bookmark',args=[item.id])}}{{pass}}');$('#char_count').text(function() {return $('#textarea2').val().length;});" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true">공유</a> {{=timesince(item.post_time,now)}} 전 {{=A(item.author_alias,_href=URL(r=request,f='person',args=[item.author]))}}
+  {{=A('%i 코멘트'%item.comments,_href=URL(r=request,f='comments',args=[item.id]))}} <a class="share" onclick="$('#textarea2').val('{{=item.title.replace("'","\\'")}}'+{{if item.url.strip().lower()!='self':}}' ('+'{{=url.netloc}}'+') '+{{else:}}' '+{{pass}}'http://{{=request.env.http_host}}{{if item.url.strip().lower()=='self':}}{{=URL(r=request,f='comments',args=[item.id])}}{{else:}}{{=URL(r=request,f='bookmark',args=[item.id])}}{{pass}}');$('#char_count').text(function() {return $('#textarea2').val().length;});" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true">공유</a> {{=timesince(item.post_time,now)}} 전 {{=A(item.author_alias,_href=URL(r=request,f='person',args=[item.author]))}} 
 		</div>
 	</div>
 	<div class="span1 post-btn">
