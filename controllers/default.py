@@ -59,7 +59,7 @@ def login():
 def logout():
     return auth.logout(next=request.env.http_referer)
 
-@cache(request.env.path_info, time_expire=10, cache_model=cache.ram)
+@cache(request.env.path_info, time_expire=5, cache_model=cache.ram)
 def index():
     sorts={
            'hot':~db.news.hotness,
