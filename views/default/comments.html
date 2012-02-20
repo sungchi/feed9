@@ -101,7 +101,7 @@ from urlparse import urlparse
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<div class="fb-comments" data-href="{{=URL(r=request,f='comments',args=[item.id])}}" data-num-posts="2" data-width="470"></div>
+<div class="fb-comments" data-href="http://{{=request.env.http_host}}{{=URL(r=request,f='comments',args=[item.id])}}" data-num-posts="2" data-width="470"></div>
 
 {{if form:}}
 {{=form.custom.begin}}
