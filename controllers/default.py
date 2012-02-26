@@ -59,7 +59,6 @@ def login():
 def logout():
     return auth.logout(next=request.env.http_referer)
 
-@cache(request.env.path_info, time_expire=5, cache_model=cache.ram)
 def index():
     sorts={
            'hot':~db.news.hotness,
@@ -74,14 +73,14 @@ def index():
     try: 
         cat=request.args[0]
         if sort == 'hot' or sort == 'score':#orderby 넣어야함 
-            news=db((db.news.category==cat) & (db.news.post_time>(now-2592000.0))).select()
+            news=db((db.news.category==cat) & (db.news.post_time>(now-2592000.0))).select(cache=(cache.ram,1800))
             if sort=='hot': news=news.sort(lambda row: -row.hotness)[limitby[0]:limitby[1]]
             if sort=='score': news=news.sort(lambda row:~row.score)[limitby[0]:limitby[1]]
         else:
-            #news=db(db.news.category==cat).select(orderby=orderby,limitby=limitby)
-            news=db(db.news.category==cat).select()
+            #news=db(db.news.category==cat).select(orderby=orderby,limitby=limitby) #no cache
+            news=db(db.news.category==cat).select(cache=(cache.ram,1800))
             news=news.sort(lambda row: -row.post_time)[limitby[0]:limitby[1]]
-        category=db(db.category.name==cat).select()[0]
+        category=db(db.category.name==cat).select(cache=(cache.ram,1800))[0]
         alias=category.alias
         dec=category.description
     except: 
@@ -90,22 +89,21 @@ def index():
         dec='이것저것 인기순으로 모아놓습니다'
        
         if sort == 'hot' or sort == 'score':
-            news=db(db.news.post_time>(now-2592000.0)).select()
+            news=db(db.news.post_time>(now-2592000.0)).select(cache=(cache.ram,1800))
             if sort=='hot': news=news.sort(lambda row: -row.hotness)[limitby[0]:limitby[1]]
             if sort=='score': news=news.sort(lambda row:~row.score)[limitby[0]:limitby[1]]
         else:
             #news=db().select(db.news.ALL,orderby=orderby,limitby=limitby)
-            news=db().select(db.news.ALL)
+            news=db().select(db.news.ALL,cache=(cache.ram,1800))
             news=news.sort(lambda row: -row.post_time)[limitby[0]:limitby[1]]
         #news=db(db.news.post_time>(now-2592000.0)).select(limitby=limitby,orderby=db.news.post_time|orderby)
         
     db.person.email.requires=IS_NOT_EMPTY()    
     form = author_func()
-    cat_list=[[r.alias,r.name] for r in db().select(db.category.ALL)]
+    cat_list=[[r.alias,r.name] for r in db().select(db.category.ALL,cache=(cache.ram,1800))]
 
     return response.render(dict(login_form=form,cat_list=cat_list,category=cat,alias=alias,news=news,dec=dec,sort=sort,page=page))
 
-@cache(request.env.path_info, time_expire=60, cache_model=cache.ram)
 def bookmark():
     try: item=db(db.news.id==request.args[0]).select()[0]
     except: redirect(URL(r=request,f='index'))
