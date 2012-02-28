@@ -77,9 +77,8 @@ def index():
             if sort=='hot': news=news.sort(lambda row: -row.hotness)[limitby[0]:limitby[1]]
             if sort=='score': news=news.sort(lambda row:~row.score)[limitby[0]:limitby[1]]
         else:
-            #news=db(db.news.category==cat).select(orderby=orderby,limitby=limitby) #no cache
-            news=db(db.news.category==cat).select(cache=(cache.ram,1800))
-            news=news.sort(lambda row: -row.post_time)[limitby[0]:limitby[1]]
+            news=db(db.news.category==cat).select(cache=(cache.ram,1800),orderby=orderby,limitby=limitby) #no cache
+            #news=news.sort(lambda row: -row.post_time)[limitby[0]:limitby[1]]
         category=db(db.category.name==cat).select(cache=(cache.ram,1800))[0]
         alias=category.alias
         dec=category.description
@@ -93,10 +92,8 @@ def index():
             if sort=='hot': news=news.sort(lambda row: -row.hotness)[limitby[0]:limitby[1]]
             if sort=='score': news=news.sort(lambda row:~row.score)[limitby[0]:limitby[1]]
         else:
-            #news=db().select(db.news.ALL,orderby=orderby,limitby=limitby)
-            news=db().select(db.news.ALL,cache=(cache.ram,1800))
-            news=news.sort(lambda row: -row.post_time)[limitby[0]:limitby[1]]
-        #news=db(db.news.post_time>(now-2592000.0)).select(limitby=limitby,orderby=db.news.post_time|orderby)
+            news=db().select(db.news.ALL,cache=(cache.ram,1800),orderby=orderby,limitby=limitby)
+            #news=news.sort(lambda row: -row.post_time)[limitby[0]:limitby[1]]
         
     db.person.email.requires=IS_NOT_EMPTY()    
     form = author_func()
