@@ -28,7 +28,8 @@ auth = Auth(db)
 auth.settings.table_user_name = 'person'
 auth.settings.request_reset_password_next = URL('index')
 auth.settings.reset_password_next = URL('login')
-auth.settings.long_expiration = 3600*24*30 # one month
+settings.expiration = 0
+auth.settings.long_expiration = 0
 auth.settings.remember_me_form = True
 #auth.settings.login_next = URL('index')
 auth.messages.reset_password= "다음 링크를 클릭하시면 비밀번호 재설정 페이지로 이동합니다. http://"+request.env.http_host+URL(r=request,f='new_password')+'/%(key)s'
