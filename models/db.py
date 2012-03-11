@@ -7,7 +7,8 @@ now=time.time()
 from gluon.settings import settings
 from gluon.tools import Auth
 import mail_setting
-
+from gluon.contrib.login_methods.gae_google_account import GaeGoogleAccount
+from gluon.contrib.login_methods.extended_login_form import ExtendedLoginForm
 # if running on Google App Engine
 if settings.web2py_runtime_gae:
     from gluon.contrib.gql import *
@@ -28,7 +29,7 @@ auth = Auth(db)
 auth.settings.table_user_name = 'person'
 auth.settings.request_reset_password_next = URL('index')
 auth.settings.reset_password_next = URL('login')
-settings.expiration = 3600*24*30
+auth.settings.expiration = 3600*24*30
 auth.settings.long_expiration = 3600*24*30 # one month
 auth.settings.remember_me_form = True
 #auth.settings.login_next = URL('index')
@@ -59,6 +60,7 @@ custom_auth_table.email.requires = [
 
 auth.settings.table_user = custom_auth_table
 auth.define_tables(username=False)
+#auth.settings.login_form = ExtendedLoginForm(auth, GaeGoogleAccount())
 
 db.define_table('category',
    Field('name'),

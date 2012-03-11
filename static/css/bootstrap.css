@@ -619,7 +619,7 @@ input[name="category"][type="radio"],input[name="delete_this_record"] { display:
 h3.cat3 { line-height: 36px; margin-top: 10px; }
 .facebook_like { margin-top: 100px; }
 
-.chrome {padding-left: 100px; padding-top: 35px;}
+.chrome {padding-left: 100px;}
 label {float: left; width:130px; text-align:right;}
 footer {margin-top:20px;}
 .cat-page-list {margin-top:20px;}
@@ -636,3 +636,7 @@ footer {margin-top:20px;}
 .ad1 { width: 240px; margin:0 auto; }
 iframe[name="realclick_adsense_frame"] { margin:0 auto;}
 .span1.post-btn { margin-left: 0px; width: 80px;}
+.dropdown-menu a.google-btn,a.google-btn {display:block; padding:0; width:170px; height:29px; background-image:url('../google_btn.png'); text-decoration:none; text-align:center; line-height:35px; color:#fff; font-weight: bold; text-shadow:1px 1px #333;}
+a.google-btn.wide-page { margin-bottom: 10px;}
+a.google-btn.register-link { margin-left: 110px;}
+a.google-btn.chrome-login {margin-left:100px;}

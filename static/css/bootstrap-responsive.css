@@ -275,6 +275,7 @@
     -moz-border-radius: 3px;
     border-radius: 3px;
   }
+  .navbar .nav > li > a, .navbar .dropdown-menu a.google-btn {padding:0;color:#fff;}
   .navbar .dropdown-menu li + li a {
     margin-bottom: 2px;
   }

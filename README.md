@@ -12,3 +12,7 @@ Feed9은 "투자와 인맥으로부터 자유로운 인디 웹서비스"입니�
 
 admin@feed9.com, <a href="http://twitter.com/sungchi">@sungchi</a>
 
+web2py 소스 수정(이 저장소에는 web2py 소스가 없습니다):
+1. gae_google_account.py : 사용자 model에 맞춰서 수정
+2. routes.py : fancy URL 추가
+3. gluon/tools.py : cas.get_user() 아랫부분 수정  

@@ -11,11 +11,12 @@ def author_func():
     login_form.element('input[type=submit]')['_class']='btn'
     login_form.element('input[type=submit]')['_value']='로그인'
     session.old_referer = request.env.http_referer
+    auth.settings.login_form=login_form
     return login_form
 
 def register():
     if auth.user_id:
-        redirect(session.old_referer)
+        redirect(URL(r=request,f='index'))
     login_form = author_func()
     form = auth.register()
     form.element('input[name=alias]')['_class']='span3'
@@ -28,7 +29,6 @@ def register():
     form.element('input[name=password_two]')['_placeholder']='비밀번호 확인'
     form.element('input[type=submit]')['_class']='btn'
     form.element('input[type=submit]')['_value']='회원가입'
-    session.old_referer = request.env.http_referer
     return dict(login_form=login_form,form=form)
 
 def profile():
@@ -40,13 +40,12 @@ def profile():
     form.element('input[type=submit]')['_class']='btn'
     form.element('input[type=submit]')['_value']='저장'
     return dict(form=form)
-'''
+
 #built-in user function
 def user(): 
-    login_form = author_func()
-    cat_list=[[r.alias,r.name] for r in db().select(db.category.ALL)]
-    return dict(cat_list=cat_list,login_form=login_form,form=auth())
-'''
+    auth.settings.login_form=GaeGoogleAccount()
+    return dict(form=auth.login(next=URL(r=request, c='default', f='index')))
+
 
 def login():
     if auth.user_id:
